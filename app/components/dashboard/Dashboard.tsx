@@ -19,7 +19,7 @@ export function Dashboard() {
               </span>
             </h1>
             <p className="text-slate-600 text-lg font-medium">
-              IT 뉴스, 미국주식 분석의 실시간 정보
+              IT 뉴스, 경제 뉴스, 거래 정보의 실시간 정보
             </p>
           </div>
         </div>

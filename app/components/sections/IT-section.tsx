@@ -72,7 +72,7 @@ export function ITSection() {
     };
 
     fetchNews();
-    const interval = setInterval(fetchNews, 60 * 60 * 1000);
+    const interval = setInterval(fetchNews, 6 * 60 * 60 * 1000);
     return () => clearInterval(interval);
   }, []);
 
