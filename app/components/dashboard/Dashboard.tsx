@@ -3,6 +3,7 @@
 import { ITSection } from '@/components/sections/IT-section';
 import { TradingKeySection } from '@/components/sections/TradingKey-section';
 import { USStockSection } from '@/components/sections/USStock-section';
+import { KakaoAd } from '@/components/ui/KakaoAd';
 
 export function Dashboard() {
   const currentTime = new Date().toLocaleString('ko-KR', { timeZone: 'America/New_York' });
@@ -30,6 +31,9 @@ export function Dashboard() {
           <TradingKeySection />
           <USStockSection />
         </div>
+
+        {/* Kakao Ad */}
+        <KakaoAd unitId="DAN-LruCBlsEi3vh4GMN" width={300} height={250} />
 
         {/* Footer */}
         <div className="text-center space-y-2">
