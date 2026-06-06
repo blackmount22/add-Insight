@@ -7,14 +7,15 @@ export async function GET() {
       'https://www.bloter.net/news/articleList.html?sc_section_code=S1N4&view_type=sm',
       {
         headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-        },
-        next: { revalidate: 21600 }
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+          'Accept-Language': 'ko-KR,ko;q=0.9'
+        }
       }
     );
 
     if (!response.ok) {
-      return NextResponse.json({ error: 'Failed to fetch' }, { status: response.status });
+      throw new Error(`HTTP ${response.status}`);
     }
 
     const html = await response.text();
@@ -35,18 +36,14 @@ export async function GET() {
           title: title.substring(0, 100),
           source: 'Bloter',
           date: dateText ? dateText.split(' ')[0] : new Date().toISOString().split('T')[0],
-          url: url
+          url
         });
       }
     });
 
-    console.log(`Found ${news.length} Bloter articles:`, news.map(n => ({ title: n.title.substring(0, 30), url: n.url })));
+    console.log(`Found ${news.length} Bloter articles`);
 
-    return NextResponse.json({
-      success: true,
-      data: news,
-      count: news.length
-    });
+    return NextResponse.json({ success: true, data: news, count: news.length });
   } catch (error) {
     console.error('Bloter scraping error:', error);
     return NextResponse.json(
